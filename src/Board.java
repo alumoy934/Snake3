@@ -8,6 +8,7 @@ public class Board extends JPanel {
 
 
     public Board(){
+        super();
         setFocusable(true);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
