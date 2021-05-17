@@ -14,14 +14,17 @@ public class Scoreboard extends JPanel {
 
     public void initGUI() {
         setLayout(new FlowLayout());
+        setBackground(Color.BLACK);
         label = new JLabel();
+
+
         add(label);
         increment(0);
     }
 
     public void increment(int inc) {
         score += inc;
-        label.setText("" + score);
+        label.setText("Score: " + score);
     }
 
 
