@@ -1,6 +1,14 @@
+import java.util.Random;
+
 public class Food extends Node{
 
-    public Food(int xCoor, int yCoor, int sizeNode) {
-        super(xCoor, yCoor, sizeNode);
+
+
+    public Food(int row, int col) {
+
+        super(row, col);
     }
+
+
+
 }

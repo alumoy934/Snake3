@@ -6,11 +6,12 @@ public class Game extends JFrame {
     private Scoreboard scoreboard;
     private Board board;
 
+    private Node n;
+
     public Game (String title){
 
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Snake Game");
         setResizable(false);
 
         init();
@@ -23,8 +24,11 @@ public class Game extends JFrame {
 
         board = new Board();
         add(board, BorderLayout.CENTER);
+
+
         pack();
         setLocationRelativeTo(null);
+
 
     }
 

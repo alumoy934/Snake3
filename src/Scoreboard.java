@@ -7,7 +7,7 @@ public class Scoreboard extends JPanel {
     private JLabel label;
 
     public Scoreboard() {
-        super();
+
         score = 0;
         initGUI();
     }

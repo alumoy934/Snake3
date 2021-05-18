@@ -1,32 +1,33 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.Graphics.*;
 
 public class Node {
 
-    private int xCoor;
-    private int yCoor;
-    private int width, height;
+    private int row;
+    private int col;
 
-    public Node(int xCoor, int yCoor, int sizeNode){
-        this.xCoor = xCoor;
-        this.yCoor = yCoor;
-        width = sizeNode;
-        height = sizeNode;
+
+    public Node(int row, int col){
+        this.row = row;
+        this.col = col;
+
     }
 
-    public int getxCoor() {
-        return xCoor;
+    public int getRow() {
+        return row;
     }
 
-    public void setxCoor(int xCoor) {
-        this.xCoor = xCoor;
+    public int getCol() {
+        return col;
     }
 
-    public int getyCoor() {
-        return yCoor;
-    }
+    public void draw(Graphics g, Color color){
 
-    public void setyCoor(int yCoor) {
-        this.yCoor = yCoor;
+        g.setColor(color);
+        g.fillRect(col * Board.SQUARE_WIDTH, row * Board.SQUARE_HEIGHT, Board.SQUARE_WIDTH, Board.SQUARE_HEIGHT);
+
+
     }
 
 
