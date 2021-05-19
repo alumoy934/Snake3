@@ -46,10 +46,10 @@ public class Snake {
 
 
     public void move_Snake(Food f){
-        boolean next_movement = canMove();
+
 
         Node n = list.get(list.size()-1);
-        if (next_movement){
+        if (canMove()){
             if (direction == Direction.LEFT ){
 
                 list.add(new Node(n.getRow(), n.getCol() - 1));

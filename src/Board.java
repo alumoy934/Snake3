@@ -98,21 +98,25 @@ public class Board extends JPanel implements ActionListener {
                 case KeyEvent.VK_LEFT :
                     if (snake.getDirection() != Direction.LEFT){
                         snake.setDirection(Direction.LEFT);
+                        snake.move_Snake(comida);
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
                     if (snake.getDirection() != Direction.RIGHT){
                         snake.setDirection(Direction.RIGHT);
+                        snake.move_Snake(comida);
                     }
                     break;
                 case KeyEvent.VK_DOWN:
                     if (snake.getDirection() != Direction.DOWN){
                         snake.setDirection(Direction.DOWN);
+                        snake.move_Snake(comida);
                     }
                     break;
                 case KeyEvent.VK_UP:
                     if (snake.getDirection() != Direction.UP){
                         snake.setDirection(Direction.UP);
+                        snake.move_Snake(comida);
                     }
             }
             //repaint();
