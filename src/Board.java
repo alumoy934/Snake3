@@ -73,7 +73,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void ProcessGameOver() {
-        JOptionPane.showMessageDialog(null, "Eres de lo malo, lo peor. Pringao, aprende de Juan Guerra.",
+        JOptionPane.showMessageDialog(null, "Fin del juego.",
                 "GAME OVER", JOptionPane.WARNING_MESSAGE);
         timer.stop();
         System.exit(0);
