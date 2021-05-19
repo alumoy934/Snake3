@@ -4,6 +4,8 @@ import java.awt.Graphics.*;
 
 public class Node {
 
+
+
     private int row;
     private int col;
 
@@ -21,6 +23,16 @@ public class Node {
     public int getCol() {
         return col;
     }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+
 
     public void draw(Graphics g, Color color){
 

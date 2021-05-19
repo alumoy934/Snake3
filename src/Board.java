@@ -42,26 +42,27 @@ public class Board extends JPanel implements ActionListener {
         addKeyListener(keyAdapter);
 
         snake = new Snake();
-        generate_Food();
-
-        snake.move_Snake();
-
-
-
+        comida = generate_Food();
 
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (!checkForGameOver()){
+            snake.move_Snake(comida);
 
+
+        }
 
         repaint();
+
     }
 
-    private void generate_Food() {
+    public Food generate_Food() {
         rnd = new Random();
         comida = new Food(rnd.nextInt(ROWS), rnd.nextInt(COLS));
+        return comida;
     }
 
     public void paintComponent (Graphics g){
@@ -71,6 +72,21 @@ public class Board extends JPanel implements ActionListener {
 
     }
 
+    private void ProcessGameOver() {
+        JOptionPane.showMessageDialog(null, "Eres de lo malo, lo peor. Pringao, aprende de Juan Guerra.",
+                "GAME OVER", JOptionPane.WARNING_MESSAGE);
+        timer.stop();
+        System.exit(0);
+    }
+
+
+    private boolean checkForGameOver() {
+        boolean gameOver = false;
+        if (!snake.canMove()){
+            ProcessGameOver();
+        }
+        return gameOver;
+    }
 
 
     class TAdapter extends KeyAdapter {
@@ -85,13 +101,19 @@ public class Board extends JPanel implements ActionListener {
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    System.out.println("Tecla derecha");
+                    if (snake.getDirection() != Direction.RIGHT){
+                        snake.setDirection(Direction.RIGHT);
+                    }
                     break;
                 case KeyEvent.VK_DOWN:
-                    System.out.println("Tecla abajo");
+                    if (snake.getDirection() != Direction.DOWN){
+                        snake.setDirection(Direction.DOWN);
+                    }
                     break;
                 case KeyEvent.VK_UP:
-                    System.out.println("Tecla arriba");
+                    if (snake.getDirection() != Direction.UP){
+                        snake.setDirection(Direction.UP);
+                    }
             }
             //repaint();
         }

@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.net.PortUnreachableException;
 import java.util.ArrayList;
@@ -21,8 +22,9 @@ public class Snake {
 
     public Snake(){
         list = new ArrayList<Node>();
-        direction = Direction.LEFT;
+        direction = Direction.RIGHT;
         list.add(new Node(Board.COLS / 2, Board.ROWS / 2));
+        list.add(new Node(Board.COLS / 2, (Board.ROWS / 2) - 1));
 
     }
 
@@ -39,23 +41,73 @@ public class Snake {
         //System.out.println(n.getRow() + " | " + n.getCol());
         list.add(new Node(n.getRow(), n.getCol()+1));
 
+    }
 
+
+
+    public void move_Snake(Food f){
+        boolean next_movement = canMove();
+
+        Node n = list.get(list.size()-1);
+        if (next_movement){
+            if (direction == Direction.LEFT ){
+
+                list.add(new Node(n.getRow(), n.getCol() - 1));
+                list.remove(0);
+                if (eat_Food(f, n)) {
+                    list.add(new Node(n.getRow(), n.getCol() - 1));
+
+                }
+
+            }else if (direction == Direction.RIGHT ){
+
+                list.add(new Node(n.getRow(), n.getCol() + 1));
+                list.remove(0);
+                if ((eat_Food(f, n))) {
+                    list.add(new Node(n.getRow(), n.getCol() + 1));
+                }
+
+            }else if (direction == Direction.UP){
+
+                list.add(new Node(n.getRow() - 1, n.getCol()));
+                list.remove(0);
+                if ((eat_Food(f, n))) {
+                    list.add(new Node(n.getRow() - 1, n.getCol()));
+                }
+
+            }else if (direction == Direction.DOWN){
+
+                list.add(new Node(n.getRow() + 1, n.getCol()));
+                list.remove(0);
+                if ((eat_Food(f, n))) {
+                    list.add(new Node(n.getRow() + 1, n.getCol()));
+                }
+
+            }
+        }
 
     }
 
-    public void move_Snake(){
+    public boolean eat_Food(Food f, Node n) {
+        return f.getRow() == n.getRow() && f.getCol() == n.getCol();
+    }
+
+
+    public boolean canMove() {
         boolean next_movement = true;
         int current_row = list.get(list.size()-1).getRow();
         int current_col = list.get(list.size()-1).getCol();
 
-        if((current_row + 1) > Board.ROWS ){
+        if((current_row + 1) > Board.ROWS || (current_row - 1) < 0){
             next_movement = false;
+
         }
 
-        if((current_col +1 > Board.COLS)){
+        if((current_col +1 > Board.COLS) || (current_col - 1) < 0){
             next_movement = false;
-        }
 
+        }
+        return next_movement;
     }
 
 }
