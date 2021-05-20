@@ -9,8 +9,14 @@ public class Snake {
     private ArrayList<Node> list;
     private Direction direction;
     private Color color = Color.green;
+    private boolean gameOver;
+    private int nodesToGrow = 0;
 
 
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
     public Direction getDirection() {
         return direction;
@@ -23,8 +29,9 @@ public class Snake {
     public Snake(){
         list = new ArrayList<Node>();
         direction = Direction.RIGHT;
+        gameOver = false;
         list.add(new Node(Board.COLS / 2, Board.ROWS / 2));
-        list.add(new Node(Board.COLS / 2, (Board.ROWS / 2) - 1));
+        //list.add(new Node(Board.COLS / 2, (Board.ROWS / 2) - 1));
 
     }
 
@@ -36,56 +43,57 @@ public class Snake {
 
     }
 
-    public void grow_Snake(){
-        Node n = list.get(list.size()-1);
-        //System.out.println(n.getRow() + " | " + n.getCol());
-        list.add(new Node(n.getRow(), n.getCol()+1));
 
+    public Node getHead(){
+        return list.get(list.size()-1);
     }
 
 
+    public void moveSnake(Food f){
 
-    public void move_Snake(Food f){
+        Node head = getHead();
+        int nextRow, nextCol;
 
-
-        Node n = list.get(list.size()-1);
-        if (canMove()){
             if (direction == Direction.LEFT ){
-
-                list.add(new Node(n.getRow(), n.getCol() - 1));
-                list.remove(0);
-                if (eat_Food(f, n)) {
-                    list.add(new Node(n.getRow(), n.getCol() - 1));
-
-                }
+                nextRow = head.getRow();
+                nextCol = head.getCol() - 1;
 
             }else if (direction == Direction.RIGHT ){
-
-                list.add(new Node(n.getRow(), n.getCol() + 1));
-                list.remove(0);
-                if ((eat_Food(f, n))) {
-                    list.add(new Node(n.getRow(), n.getCol() + 1));
-                }
+                nextRow = head.getRow();
+                nextCol = head.getCol() + 1;
 
             }else if (direction == Direction.UP){
+                nextRow = head.getRow() - 1;
+                nextCol = head.getCol();
 
-                list.add(new Node(n.getRow() - 1, n.getCol()));
-                list.remove(0);
-                if ((eat_Food(f, n))) {
-                    list.add(new Node(n.getRow() - 1, n.getCol()));
-                }
-
-            }else if (direction == Direction.DOWN){
-
-                list.add(new Node(n.getRow() + 1, n.getCol()));
-                list.remove(0);
-                if ((eat_Food(f, n))) {
-                    list.add(new Node(n.getRow() + 1, n.getCol()));
-                }
+            }else {
+                nextRow = head.getRow() + 1;
+                nextCol = head.getCol() ;
 
             }
-        }
+            moveAndGrow(f, head, nextRow, nextCol);
 
+    }
+
+    private void moveAndGrow(Food f, Node head, int nextRow, int nextCol) {
+        if (canMove(nextRow, nextCol)) {
+            if (eat_Food(f, head)) {
+                nodesToGrow ++;
+                f.setRndPosition();
+
+            }
+
+            list.add(new Node(nextRow, nextCol));
+            if (nodesToGrow == 0){
+                list.remove(0);
+            }else{
+                nodesToGrow --;
+            }
+
+
+        } else {
+            gameOver = true;
+        }
     }
 
     public boolean eat_Food(Food f, Node n) {
@@ -93,21 +101,12 @@ public class Snake {
     }
 
 
-    public boolean canMove() {
-        boolean next_movement = true;
-        int current_row = list.get(list.size()-1).getRow();
-        int current_col = list.get(list.size()-1).getCol();
+    public boolean canMove( int row, int col) {
 
-        if((current_row + 1) > Board.ROWS || (current_row - 1) < 0){
-            next_movement = false;
-
+        if ((row >= Board.ROWS) || (col >= Board.COLS) || (row < 0 )|| (col < 0)) {
+            return false;
         }
-
-        if((current_col +1 > Board.COLS) || (current_col - 1) < 0){
-            next_movement = false;
-
-        }
-        return next_movement;
+        return true;
     }
 
 }

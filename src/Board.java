@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.Random;
 
 public class Board extends JPanel implements ActionListener {
@@ -42,50 +41,40 @@ public class Board extends JPanel implements ActionListener {
         addKeyListener(keyAdapter);
 
         snake = new Snake();
-        comida = generate_Food();
+        comida = new Food();
 
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!checkForGameOver()){
-            snake.move_Snake(comida);
-
-
-        }
-
+        snake.moveSnake(comida);
+        checkForGameOver();
         repaint();
-
     }
 
-    public Food generate_Food() {
-        rnd = new Random();
-        comida = new Food(rnd.nextInt(ROWS), rnd.nextInt(COLS));
-        return comida;
-    }
+
 
     public void paintComponent (Graphics g){
         super.paintComponent(g);
-        snake.draw(g);
-        comida.draw(g, Color.red);
 
+        comida.draw(g, Color.red);
+        snake.draw(g);
     }
 
     private void ProcessGameOver() {
         JOptionPane.showMessageDialog(null, "Fin del juego.",
                 "GAME OVER", JOptionPane.WARNING_MESSAGE);
         timer.stop();
-        System.exit(0);
+
     }
 
 
-    private boolean checkForGameOver() {
-        boolean gameOver = false;
-        if (!snake.canMove()){
+    private void checkForGameOver() {
+
+        if (snake.isGameOver()){
             ProcessGameOver();
         }
-        return gameOver;
     }
 
 
@@ -98,25 +87,25 @@ public class Board extends JPanel implements ActionListener {
                 case KeyEvent.VK_LEFT :
                     if (snake.getDirection() != Direction.LEFT){
                         snake.setDirection(Direction.LEFT);
-                        snake.move_Snake(comida);
+
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
                     if (snake.getDirection() != Direction.RIGHT){
                         snake.setDirection(Direction.RIGHT);
-                        snake.move_Snake(comida);
+
                     }
                     break;
                 case KeyEvent.VK_DOWN:
                     if (snake.getDirection() != Direction.DOWN){
                         snake.setDirection(Direction.DOWN);
-                        snake.move_Snake(comida);
+
                     }
                     break;
                 case KeyEvent.VK_UP:
                     if (snake.getDirection() != Direction.UP){
                         snake.setDirection(Direction.UP);
-                        snake.move_Snake(comida);
+
                     }
             }
             //repaint();
