@@ -8,16 +8,16 @@ import java.util.Random;
 
 public class Board extends JPanel implements ActionListener {
 
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 400;
+    public static final int HEIGHT = 400;
 
-    public static final int ROWS = 60;
-    public static final int COLS = 60;
+    public static final int ROWS = 40;
+    public static final int COLS = 40;
 
     public static final int SQUARE_WIDTH = WIDTH / COLS;
     public static final int SQUARE_HEIGHT = HEIGHT / ROWS;
 
-    private static final int DELAY = 400;
+    private static final int DELAY = 300;
 
     private Random rnd;
     private TAdapter keyAdapter;
@@ -25,6 +25,7 @@ public class Board extends JPanel implements ActionListener {
 
     private Snake snake;
     private Food comida;
+    private SpecialFood specialFood;
 
     Timer timer;
 
@@ -42,13 +43,33 @@ public class Board extends JPanel implements ActionListener {
 
         snake = new Snake();
         comida = new Food();
+        specialFood = new SpecialFood();
 
+        random_Special_Food();
 
+    }
+
+    private void random_Special_Food() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true){
+                    try {
+                        Thread.sleep(5000);
+                        specialFood = new SpecialFood();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        t.start();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        snake.moveSnake(comida);
+        snake.moveSnake(comida, specialFood);
         checkForGameOver();
         repaint();
     }
@@ -58,6 +79,7 @@ public class Board extends JPanel implements ActionListener {
     public void paintComponent (Graphics g){
         super.paintComponent(g);
 
+        specialFood.draw(g, Color.BLUE);
         comida.draw(g, Color.red);
         snake.draw(g);
     }
@@ -85,25 +107,25 @@ public class Board extends JPanel implements ActionListener {
 
             switch (keycode) {
                 case KeyEvent.VK_LEFT :
-                    if (snake.getDirection() != Direction.LEFT){
+                    if (snake.getDirection() != Direction.RIGHT){
                         snake.setDirection(Direction.LEFT);
 
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (snake.getDirection() != Direction.RIGHT){
+                    if (snake.getDirection() != Direction.LEFT){
                         snake.setDirection(Direction.RIGHT);
 
                     }
                     break;
                 case KeyEvent.VK_DOWN:
-                    if (snake.getDirection() != Direction.DOWN){
+                    if (snake.getDirection() != Direction.UP){
                         snake.setDirection(Direction.DOWN);
 
                     }
                     break;
                 case KeyEvent.VK_UP:
-                    if (snake.getDirection() != Direction.UP){
+                    if (snake.getDirection() != Direction.DOWN){
                         snake.setDirection(Direction.UP);
 
                     }

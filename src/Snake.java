@@ -49,7 +49,7 @@ public class Snake {
     }
 
 
-    public void moveSnake(Food f){
+    public void moveSnake(Food f, SpecialFood specialFood){
 
         Node head = getHead();
         int nextRow, nextCol;
@@ -71,16 +71,19 @@ public class Snake {
                 nextCol = head.getCol() ;
 
             }
-            moveAndGrow(f, head, nextRow, nextCol);
+            moveAndGrow(f, specialFood, head, nextRow, nextCol);
 
     }
 
-    private void moveAndGrow(Food f, Node head, int nextRow, int nextCol) {
-        if (canMove(nextRow, nextCol)) {
-            if (eat_Food(f, head)) {
+    private void moveAndGrow(Food f, SpecialFood specialFood, Node head, int nextRow, int nextCol) {
+        if (canMove(nextRow, nextCol) && !colision()) {
+            if (eat_Food(f,  head)) {
                 nodesToGrow ++;
                 f.setRndPosition();
+            }
 
+            if (eat_Special_Food(specialFood, head)){
+                nodesToGrow +=3;
             }
 
             list.add(new Node(nextRow, nextCol));
@@ -96,8 +99,14 @@ public class Snake {
         }
     }
 
-    public boolean eat_Food(Food f, Node n) {
-        return f.getRow() == n.getRow() && f.getCol() == n.getCol();
+
+
+    private boolean eat_Special_Food(SpecialFood specialFood, Node head) {
+        return (specialFood.getRow() == head.getRow() && specialFood.getCol() == head.getCol());
+    }
+
+    public boolean eat_Food(Food f, Node head) {
+        return (f.getRow() == head.getRow() && f.getCol() == head.getCol());
     }
 
 
@@ -107,6 +116,21 @@ public class Snake {
             return false;
         }
         return true;
+    }
+
+    public boolean colision(){
+        boolean colision = false;
+        Node head = getHead();
+
+        for (int i = 0; i < list.size()-2; i++) {
+            if (list.get(i).getRow() == head.getRow() && list.get(i).getCol() == head.getCol()){
+                colision = true;
+                //System.out.println("la serpiente se ha tocado.");
+                break;
+            }
+        }
+
+        return colision;
     }
 
 }
