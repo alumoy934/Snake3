@@ -5,6 +5,7 @@ public class Game extends JFrame {
 
     private Scoreboard scoreboard;
     private Board board;
+    private JToolBar toolBar;
 
     private Node n;
 
@@ -18,6 +19,11 @@ public class Game extends JFrame {
     }
 
     private void init() {
+
+        toolBar = new JToolBar();
+        toolBar.setVisible(true);
+        add(toolBar, BorderLayout.NORTH);
+
 
         scoreboard = new Scoreboard();
         add(scoreboard, BorderLayout.SOUTH);
