@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Game extends JFrame {
 
@@ -45,6 +47,22 @@ public class Game extends JFrame {
         JButton buttonAbout = new JButton("About");
         buttonAbout.setFocusable(false);
         toolBar.add(buttonAbout);
+
+        buttonConfig.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Boton config presionado");
+            }
+        });
+
+        buttonAbout.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Version 1.0 \n Autor: Carlos Moyano",
+                        "Snake Detail Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
         add(toolBar, BorderLayout.NORTH);
     }
