@@ -1,44 +1,27 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class configuration extends JDialog{
-    private JPanel panel1;
-    private JTextField username;
-    private JButton buttoneasy;
-    private JButton buttonmedium;
-    private JButton buttonhard;
+
+    private JPanel mainPanel;
+    private JTextField textFieldUsername;
+    private JButton buttonEasy;
+    private JButton buttonMedium;
+    private JButton buttonHard;
+    private JButton buttonOK;
+    private JButton buttonCancel;
     private JLabel labelusername;
-    private JLabel level;
-
-    public configuration (){
+    private JLabel labelLevel;
 
 
-       panel1 = new JPanel();
+    public configuration() {
+        buttonEasy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-       labelusername = new JLabel("Enter your username");
-       panel1.add(labelusername);
-
-       username = new JTextField();
-       username.setColumns(15);
-       panel1.add(username);
-
-       level = new JLabel("Choose level");
-       panel1.add(level);
-
-       buttoneasy = new JButton("Easy");
-       panel1.add(buttoneasy);
-       buttonmedium = new JButton("Medium");
-       panel1.add(buttonmedium);
-       buttonhard = new JButton("Hard");
-       panel1.add(buttonhard);
-
-       add(panel1);
-
-       setModalityType(ModalityType.APPLICATION_MODAL);
-       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-       setSize(250, 150);
-
-       setLocationRelativeTo(null);
-
+            }
+        });
     }
 }

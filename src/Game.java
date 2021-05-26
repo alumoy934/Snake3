@@ -7,11 +7,9 @@ public class Game extends JFrame {
 
     private Scoreboard scoreboard;
     private Board board;
+    private Node n;
     private configuration config;
 
-
-
-    private Node n;
 
     public Game (String title){
 
@@ -52,8 +50,8 @@ public class Game extends JFrame {
         buttonConfig.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                config = new configuration();
-                config.setVisible(true);
+               config = new configuration();
+               config.setVisible(true);
             }
         });
 
