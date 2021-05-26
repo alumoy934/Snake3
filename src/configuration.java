@@ -16,12 +16,25 @@ public class configuration extends JDialog{
     private JLabel labelLevel;
 
 
-    public configuration() {
-        buttonEasy.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    public configuration(){
 
-            }
-        });
+        mainPanel = new JPanel(new BorderLayout(15,15));
+        setSize(300, 300);
+        setLocationRelativeTo(null);
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        labelusername = new JLabel("Enter username");
+        topPanel.add(labelusername);
+
+        textFieldUsername = new JTextField(15);
+        topPanel.add(textFieldUsername);
+
+        add(topPanel, BorderLayout.NORTH);
+
+        labelLevel = new JLabel("Choose level");
+        add(labelLevel, BorderLayout.WEST);
+        ;
+
+
     }
 }
