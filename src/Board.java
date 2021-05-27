@@ -17,7 +17,7 @@ public class Board extends JPanel implements ActionListener {
     public static final int SQUARE_WIDTH = WIDTH / COLS;
     public static final int SQUARE_HEIGHT = HEIGHT / ROWS;
 
-    private static final int DELAY = 300;
+    private static int DELAY =300;
 
     private Random rnd;
     private TAdapter keyAdapter;
@@ -35,8 +35,9 @@ public class Board extends JPanel implements ActionListener {
         setFocusable(true);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-        timer = new Timer(DELAY,this);
+        timer = new Timer(DatesConfig.DELTA,this);
         timer.start();
+
 
         keyAdapter = new TAdapter();
         addKeyListener(keyAdapter);

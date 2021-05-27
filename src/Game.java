@@ -13,11 +13,12 @@ public class Game extends JFrame {
 
     public Game (String title){
 
+
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-
         init();
+
     }
 
     private void init() {
@@ -74,6 +75,8 @@ public class Game extends JFrame {
             public void run() {
                 JFrame frame = new Game("Snake Game");
                 frame.setVisible(true);
+
+
             }
         });
     }
