@@ -3,28 +3,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class configuration extends JDialog{
+public class Configuration extends JDialog{
 
     private JPanel mainPanel;
     private JTextField textFieldUsername;
     private JButton buttonEasy;
     private JButton buttonMedium;
-
-    public JButton getButtonEasy() {
-        return buttonEasy;
-    }
-
     private JButton buttonHard;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JLabel labelusername;
     private JLabel labelLevel;
-
-    private String username;
-    private int level = 0;
+    private Board board;
 
 
-    public configuration(){
+
+    public Configuration(Board board , JFrame frame){
+
+        super(frame, "Configuration", true);
+        this.board = board;
 
         setResizable(false);
         setTitle("Configuration Details");
@@ -53,7 +50,9 @@ public class configuration extends JDialog{
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DatesConfig.buttonOKPresionado = true;
+                DatesConfig.username = textFieldUsername.getText();
+                board.initGame();
+                dispose();
 
             }
         });
@@ -62,7 +61,8 @@ public class configuration extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                dispose();
+               System.exit(0);
+
             }
         });
 
@@ -81,22 +81,22 @@ public class configuration extends JDialog{
 
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        /*buttonEasy.addActionListener(new ActionListener() {
+        buttonEasy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand() == "Easy"){
-                    DatesConfig.level = 1;
+                    DatesConfig.setDELTA(1);
 
 
                 }
             }
-        });*/
+        });
 
         buttonMedium.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand() == "Medium"){
-                    DatesConfig.level = 2;
+                    DatesConfig.setDELTA(2);
 
 
                 }
@@ -107,7 +107,7 @@ public class configuration extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand() == "Hard"){
-                    DatesConfig.level = 3;
+                    DatesConfig.setDELTA(3);
 
 
                 }

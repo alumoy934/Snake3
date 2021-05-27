@@ -8,7 +8,8 @@ public class Game extends JFrame {
     private Scoreboard scoreboard;
     private Board board;
     private Node n;
-    private configuration config;
+    private Configuration config;
+    private static JFrame frame;
 
 
     public Game (String title){
@@ -24,17 +25,15 @@ public class Game extends JFrame {
     private void init() {
 
         create_Toolbar();
-
         scoreboard = new Scoreboard();
         add(scoreboard, BorderLayout.SOUTH);
-
-
         board = new Board();
         add(board, BorderLayout.CENTER);
-
-
         pack();
         setLocationRelativeTo(null);
+
+        config = new Configuration(board, this);
+        config.setVisible(true);
 
 
     }
@@ -51,7 +50,7 @@ public class Game extends JFrame {
         buttonConfig.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               config = new configuration();
+               config = new Configuration(board, frame);
                config.setVisible(true);
             }
         });
@@ -73,7 +72,7 @@ public class Game extends JFrame {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame = new Game("Snake Game");
+                frame = new Game("Snake Game");
                 frame.setVisible(true);
 
 

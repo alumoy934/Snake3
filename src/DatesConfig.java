@@ -2,13 +2,8 @@ import java.net.PortUnreachableException;
 
 public class DatesConfig {
 
-
-
     public static int DELTA = 0;
     public static String username;
-    public static int level = 0;
-
-    public static boolean buttonOKPresionado = false;
 
     public static void setDELTA(int level) {
 

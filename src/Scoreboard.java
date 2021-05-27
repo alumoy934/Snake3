@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Date;
 
 public class Scoreboard extends JPanel {
 
@@ -24,7 +25,7 @@ public class Scoreboard extends JPanel {
 
     public void increment(int inc) {
         score += inc;
-        label.setText("Score: " + score);
+        label.setText(DatesConfig.username + ": " +  score);
     }
 
 
