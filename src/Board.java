@@ -28,16 +28,20 @@ public class Board extends JPanel implements ActionListener {
 
     Timer timer;
 
+    private Scoreboard scoreboard;
 
-    public Board(){
+
+    public Board(Scoreboard scoreboard){
         super();
         setFocusable(true);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.scoreboard = scoreboard;
+
 
         keyAdapter = new TAdapter();
         addKeyListener(keyAdapter);
 
-        snake = new Snake();
+        snake = new Snake(this.scoreboard);
         comida = new Food();
         specialFood = new SpecialFood();
 

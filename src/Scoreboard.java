@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
-public class Scoreboard extends JPanel {
+public class Scoreboard extends JPanel implements Incrementer{
 
     private int score;
     private JLabel label;
@@ -15,7 +15,7 @@ public class Scoreboard extends JPanel {
 
     public void initGUI() {
         setLayout(new FlowLayout());
-        setBackground(Color.BLACK);
+        //setBackground(Color.BLACK);
         label = new JLabel();
 
 

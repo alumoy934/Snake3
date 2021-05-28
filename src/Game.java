@@ -12,6 +12,7 @@ public class Game extends JFrame {
     private static JFrame frame;
 
 
+
     public Game (String title){
 
 
@@ -27,7 +28,7 @@ public class Game extends JFrame {
         create_Toolbar();
         scoreboard = new Scoreboard();
         add(scoreboard, BorderLayout.SOUTH);
-        board = new Board();
+        board = new Board(scoreboard);
         add(board, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(null);

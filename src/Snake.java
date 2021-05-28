@@ -4,7 +4,7 @@ import java.net.PortUnreachableException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Snake {
+public class Snake implements Incrementer{
 
     private ArrayList<Node> list;
     private Direction direction;
@@ -12,6 +12,7 @@ public class Snake {
     private boolean gameOver;
     private int nodesToGrow = 0;
 
+    private Incrementer scoreBoardIncrementer;
 
 
     public boolean isGameOver() {
@@ -26,7 +27,9 @@ public class Snake {
         this.direction = direction;
     }
 
-    public Snake(){
+    public Snake(Incrementer scoreBoardIncrementer){
+
+        this.scoreBoardIncrementer = scoreBoardIncrementer;
         list = new ArrayList<Node>();
         direction = Direction.RIGHT;
         gameOver = false;
@@ -78,11 +81,13 @@ public class Snake {
     private void moveAndGrow(Food f, SpecialFood specialFood, Node head, int nextRow, int nextCol) {
         if (canMove(nextRow, nextCol) && !colision()) {
             if (eat_Food(f,  head)) {
+                scoreBoardIncrementer.increment(10);
                 nodesToGrow ++;
                 f.setRndPosition();
             }
 
             if (eat_Special_Food(specialFood, head)){
+                scoreBoardIncrementer.increment(30);
                 nodesToGrow +=3;
             }
 
@@ -133,4 +138,8 @@ public class Snake {
         return colision;
     }
 
+    @Override
+    public void increment(int inc) {
+
+    }
 }
