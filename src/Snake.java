@@ -8,12 +8,19 @@ public class Snake implements Incrementer{
 
     private ArrayList<Node> list;
     private Direction direction;
+
+
+
     private Color color = Color.green;
     private boolean gameOver;
     private int nodesToGrow = 0;
 
     private Incrementer scoreBoardIncrementer;
 
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     public boolean isGameOver() {
         return gameOver;

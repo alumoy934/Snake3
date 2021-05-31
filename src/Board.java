@@ -23,6 +23,7 @@ public class Board extends JPanel implements ActionListener {
 
 
     private Snake snake;
+    private Snake snake2;
     private Food comida;
     private SpecialFood specialFood;
 
@@ -42,6 +43,7 @@ public class Board extends JPanel implements ActionListener {
         addKeyListener(keyAdapter);
 
         snake = new Snake(scoreboard);
+        snake2 = new Snake(scoreboard);
         comida = new Food();
         specialFood = new SpecialFood();
 
@@ -78,6 +80,7 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         snake.moveSnake(comida, specialFood);
+        snake2.moveSnake(comida, specialFood);
         checkForGameOver();
         repaint();
     }
@@ -90,6 +93,8 @@ public class Board extends JPanel implements ActionListener {
         specialFood.draw(g, Color.BLUE);
         comida.draw(g, Color.red);
         snake.draw(g);
+        snake2.setColor(Color.black);
+        snake2.draw(g);
     }
 
     private void ProcessGameOver() {
@@ -102,7 +107,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void checkForGameOver() {
 
-        if (snake.isGameOver()){
+        if (snake.isGameOver() || snake2.isGameOver()){
             ProcessGameOver();
         }
     }
@@ -135,6 +140,32 @@ public class Board extends JPanel implements ActionListener {
                 case KeyEvent.VK_UP:
                     if (snake.getDirection() != Direction.DOWN){
                         snake.setDirection(Direction.UP);
+
+                    }
+                // Controles para la segunda Snake
+
+                case KeyEvent.VK_A:
+                    if (snake2.getDirection() != Direction.RIGHT){
+                        snake2.setDirection(Direction.LEFT);
+
+                    }
+                    break;
+
+                case KeyEvent.VK_D:
+                    if (snake2.getDirection() != Direction.LEFT){
+                        snake2.setDirection(Direction.RIGHT);
+
+                    }
+                    break;
+                case KeyEvent.VK_S:
+                    if (snake2.getDirection() != Direction.UP){
+                        snake2.setDirection(Direction.DOWN);
+
+                    }
+                    break;
+                case KeyEvent.VK_W:
+                    if (snake2.getDirection() != Direction.DOWN){
+                        snake2.setDirection(Direction.UP);
 
                     }
             }
