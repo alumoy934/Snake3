@@ -41,7 +41,7 @@ public class Board extends JPanel implements ActionListener {
         keyAdapter = new TAdapter();
         addKeyListener(keyAdapter);
 
-        snake = new Snake(this.scoreboard);
+        snake = new Snake(scoreboard);
         comida = new Food();
         specialFood = new SpecialFood();
 
